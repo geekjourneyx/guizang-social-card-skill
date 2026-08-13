@@ -18,7 +18,7 @@
          .pair-preview                       21:9 + 1:1 配对预览
 
        Theme switching via <html data-theme="…">:
-         ink-classic | indigo-porcelain | forest-ink | kraft-paper | dune | midnight-ink
+         ink-classic | indigo-porcelain | forest-ink | kraft-paper | dune | midnight-ink | jieni-gold
 
        Fill posters where marked <!-- POSTERS_HERE -->.
        Each poster carries one Layout Recipe (M01-M15) from
@@ -87,9 +87,9 @@
       --paper-rgb: 240,230,210;
       --accent-rgb: 143,118,80;
     }
-    /* Midnight Ink — the ONLY official dark Editorial palette.
-       Use for game key art, night scenes, dark photography, cinematic covers.
-       Do not improvise other dark backgrounds. */
+    /* Midnight Ink — dark Editorial palette for game key art, night scenes,
+       dark photography, and cinematic covers.
+       Do not improvise unapproved dark backgrounds. */
     [data-theme="midnight-ink"] {
       --paper:     #0e0d0c;
       --paper-2:   #1a1714;
@@ -101,6 +101,18 @@
       --ink-rgb: 236,226,207;
       --paper-rgb: 14,13,12;
       --accent-rgb: 212,160,74;
+    }
+    [data-theme="jieni-gold"] {
+      --paper:     #050505;
+      --paper-2:   #0d0d0c;
+      --ink:       #f1efe8;
+      --muted:     #8a8780;
+      --line:      rgba(201,164,92,.22);
+      --accent:    #c9a45c;
+      --accent-soft: #2a2113;
+      --ink-rgb: 241,239,232;
+      --paper-rgb: 5,5,5;
+      --accent-rgb: 201,164,92;
     }
 
     /* ---------- 2. Typography stack ---------- */
@@ -188,6 +200,38 @@
         radial-gradient(80% 50% at 28% 16%, rgba(212,160,74,.12), transparent 64%),
         radial-gradient(70% 60% at 80% 86%, rgba(60,40,20,.20), transparent 72%),
         linear-gradient(180deg, rgba(236,226,207,.02), rgba(0,0,0,.32));
+    }
+    [data-theme="jieni-gold"] .grain {
+      opacity: .18;
+      mix-blend-mode: screen;
+      background-image: radial-gradient(rgba(241,239,232,.075) .7px, transparent .8px);
+      background-size: 3px 3px;
+    }
+    [data-theme="jieni-gold"] .paper-wash {
+      background:
+        radial-gradient(72% 46% at 22% 18%, rgba(201,164,92,.12), transparent 66%),
+        radial-gradient(58% 54% at 78% 58%, rgba(241,239,232,.055), transparent 72%),
+        linear-gradient(180deg, rgba(241,239,232,.012), rgba(0,0,0,.42));
+    }
+    [data-theme="jieni-gold"] canvas.mag-bg {
+      opacity: .16;
+      -webkit-mask-image: radial-gradient(ellipse 64% 52% at 18% 78%, #000 0%, rgba(0,0,0,.72) 38%, transparent 76%);
+      mask-image: radial-gradient(ellipse 64% 52% at 18% 78%, #000 0%, rgba(0,0,0,.72) 38%, transparent 76%);
+    }
+    [data-theme="jieni-gold"] .frame-img,
+    [data-theme="jieni-gold"] .frame-shot {
+      background: #080808;
+      box-shadow:
+        0 0 0 1px rgba(201,164,92,.24),
+        0 18px 56px rgba(0,0,0,.52),
+        0 0 32px rgba(201,164,92,.06);
+    }
+    [data-theme="jieni-gold"] .metal-gold {
+      color: var(--accent);
+      background: linear-gradient(105deg, #8a672d 0%, #c9a45c 42%, #ead596 58%, #a77d38 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     /* ---------- 6. Typography roles ----------
@@ -590,6 +634,13 @@
     }
     .map-legend.tr { left: auto; right: 14px; top: 14px; bottom: auto; }
 
+    [data-theme="jieni-gold"] .map-pin .card {
+      background: rgba(var(--paper-rgb),.94);
+    }
+    [data-theme="jieni-gold"] .map-legend {
+      background: rgba(var(--paper-rgb),.92);
+    }
+
     /* ---------- 10. Editorial components ---------- */
     .callout {
       border-left: 3px solid var(--accent);
@@ -701,6 +752,11 @@
       border-left: 3px solid var(--accent);
     }
     .beforeafter .ba-block.before { opacity: .68; }
+    [data-theme="jieni-gold"] .beforeafter .ba-block.before {
+      opacity: 1;
+      background: var(--paper);
+      border-left-color: rgba(var(--accent-rgb),.52);
+    }
 
     /* ---------- 11. Pair preview frame ---------- */
     .pair-preview {
@@ -756,7 +812,7 @@
 <body>
   <!-- THEME_OVERRIDE
        Change <html data-theme="…"> above to:
-       ink-classic | indigo-porcelain | forest-ink | kraft-paper | dune | midnight-ink
+       ink-classic | indigo-porcelain | forest-ink | kraft-paper | dune | midnight-ink | jieni-gold
   -->
   <main class="sheet">
 

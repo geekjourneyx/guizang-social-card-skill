@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test:docs": "node scripts/check-skill-docs.mjs",
+    "test:contrast": "node scripts/check-editorial-contrast.mjs",
     "validate": "node validate-social-deck.mjs"
   },
   "keywords": [],

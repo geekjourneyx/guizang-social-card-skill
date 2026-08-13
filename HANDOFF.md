@@ -1,6 +1,6 @@
 # Handoff — guizang-social-card-skill
 
-最后更新：2026-07-01 · 版本：v0.15（Live Photo 生产规则：3s/5s 平台限制、拼图版式、长视频处理、发布提醒、可见文案与不自造规则）
+最后更新：2026-08-13 · 版本：v0.16（Jieni Gold 双暗色分工、根 `<html>` 主题切换、文档契约与三比例视觉夹具）
 
 这份文档只记录**事实**：当前 skill 由哪些文件组成、每个文件管什么、本轮更新改了什么、怎么验证它还能跑。想读"为什么这样做"或"未来要怎么走"，去看 `PRODUCT.md`。
 
@@ -25,7 +25,7 @@ guizang-social-card-skill/
 ├── references/                # 子规范，按需读取
 │   ├── platform-specs.md      平台 × 分辨率 × 命名
 │   ├── style-system.md        两种风格的硬规则与反模式
-│   ├── theme-presets.md       6 套杂志 palette（含 Midnight Ink）+ 4 套 Swiss accent
+│   ├── theme-presets.md       7 套杂志 palette（含 Midnight Ink + Jieni Gold）+ 4 套 Swiss accent
 │   ├── layout-recipes.md      版式骨架（M01-M16 + S01-S12 + WeChat）
 │   ├── components.md          字体 / 卡片 / 间距 / 图标 / 标题字数表
 │   ├── background-systems.md  墨流 / 网格 / 纸纹层
@@ -70,7 +70,7 @@ v0.13 起：git 仓库。`local-tests/` 整目录在 `.gitignore` 中，commit �
 | --- | --- |
 | 工作流步骤 | 7 步（Intake → Extract → Style → Plan → Seed → Build → Image → Deliver） |
 | 风格模式 | 2 个（Editorial Magazine × E-ink / Swiss International） |
-| 主题色 | Editorial 6 套（5 浅 + 1 暗 Midnight Ink）+ Swiss 4 套 = 10 套 |
+| 主题色 | Editorial 7 套（5 浅 + 2 暗）+ Swiss 4 套 = 11 套 |
 | 版式骨架 | Editorial 16 个（M01-M16）+ Swiss 12 个（S01-S12）= 28 个 |
 | 平台 × 比例 | 小红书 3:4 / 1:1，微信 21:9 + 1:1 配对，方封面 1:1 |
 | 小红书品类覆盖 | 11 个品类中 7 个完整支持，4 个需用户提供素材，4 个明确不接 |
@@ -83,6 +83,19 @@ v0.13 起：git 仓库。`local-tests/` 整目录在 `.gitignore` 中，commit �
 ## 3. 版本历史
 
 仅记录"什么时候新增/变更了哪些可见资产"，不记录文风调整。
+
+### v0.16 · 2026-08-13（本轮）
+
+主题：**Jieni Gold 进入当前主题真相，并同步切换和验证约定**。
+
+**新增与修正**
+- 新增 **Jieni Gold**：第二套暗色 Editorial palette，服务 AI / Harness / 开源 / 产品 / 个人品牌图像；与 Midnight Ink 的游戏 / 夜景 / 文化图像分工并存。当前主题覆盖为 Editorial 7 套（5 浅 + 2 暗）+ Swiss 4 套 = 11 套。
+- README 中的主题切换示例统一改为根 `<html data-theme="...">`；Swiss 锚点色统一使用根 `<html data-accent="...">`，不再把 `data-theme` 放在单张 `.poster` 上。
+- `scripts/check-skill-docs.mjs` 增加确定性文档契约：锁定 11 套当前主题、Jieni Gold 条目与根元素切换写法。
+- 增加三比例（3:4 / 21:9 / 1:1）视觉夹具，用于验证 Jieni Gold 在各画板上的呈现。
+
+**历史保留**
+- v0.12 的 Midnight Ink 从 5 套浅色扩到第 6 套 Editorial 的记录，以及更早的 `5 + 4 = 9` 计数，均为当时事实，未改写。
 
 ### v0.15 · 2026-07-01（本轮）
 

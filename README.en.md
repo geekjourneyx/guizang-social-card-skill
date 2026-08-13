@@ -62,7 +62,7 @@ Turn these three game clips into a triple Live Photo collage with Swiss-style gu
 - 📐 **3 canvas sizes**: `.poster.xhs` 1080×1440 (Xiaohongshu 3:4), `.poster.wide` 2100×900 (WeChat 21:9), `.poster.square` 1080×1080 (WeChat 1:1)
 - 🎬 **Live Photo motion cards**: single video, two-grid, three-grid, four-grid, triple collage, and low-cost long-video diagnosis; `5s` for Xiaohongshu, `3s` for WeChat Official Account articles
 - 🧩 **28 layout skeletons**: 16 Editorial (`M01-M16`, including Image-Led Cover, Pipeline, Before/After) + 12 Swiss (`S01-S12`, including KPI Tower, H-Bar Chart, Matrix + Hero)
-- 🎨 **10 theme presets**: 6 Editorial (Ink Classic, Indigo Porcelain, Forest Ink, Kraft Paper, Dune, **Midnight Ink** dark) + 4 Swiss anchor colors (IKB Klein Blue, Lemon, Lemon Green, Safety Orange)
+- 🎨 **11 theme presets**: Editorial 7 (Ink Classic, Indigo Porcelain, Forest Ink, Kraft Paper, Dune, **Midnight Ink**, and **Jieni Gold** dark) + 4 Swiss anchor colors (IKB Klein Blue, Lemon, Lemon Green, Safety Orange)
 - 🖼 **Image sourcing workflow**: user images first; otherwise waterfall through Unsplash → Pexels → Flickr CC → Wallhaven → direct search, downloaded locally with auto-generated `SOURCES.md`
 - 🌫 **WebGL ink-flow background**: editorial hero pages can ship a live ink animation; can be disabled for low-power devices or screenshot mode
 - 🪧 **Text-on-image + subject safety**: full-bleed images require quiet-zone and subject mapping first; add only localized tint when needed, not a default full-canvas mask
@@ -198,7 +198,7 @@ Once installed, Claude Code auto-detects the skill. Trigger phrases:
 The skill is a structured workflow. The agent walks through 7 steps:
 
 1. **Intake** — capture 4 things: target platform / style / source content / user images. When no images are available, present A/B/C once (shoot your own / AI generate / source online); don't re-pitch
-2. **Style & Theme** — pick Editorial or Swiss, then pick one of 10 theme presets. Custom hex values are not allowed
+2. **Style & Theme** — pick Editorial or Swiss, then pick one of 11 theme presets. Custom hex values are not allowed
 3. **Layout Selection** — pick / paste / adapt copy from the 28 layout skeletons. 16 Editorial / 12 Swiss
 4. **Asset Prep** — source images (Unsplash / Pexels / Flickr CC / Wallhaven / direct search), download locally + write `SOURCES.md`; ask whether to credit sources
 5. **Compose & Render** — copy seed template → replace `<!-- POSTERS_HERE -->` → `node render.mjs`
@@ -233,7 +233,7 @@ node validate-social-deck.mjs path/to/task-dir
 
 Pick from [`references/theme-presets.md`](./references/theme-presets.md). **Custom hex values are not allowed** — protecting the aesthetic matters more than freedom of choice.
 
-### Editorial (6)
+### Editorial 7
 
 | Theme | Tones | Best for |
 |-------|-------|----------|
@@ -243,6 +243,7 @@ Pick from [`references/theme-presets.md`](./references/theme-presets.md). **Cust
 | 🍂 **Kraft Paper** | `#2a1e13` / `#eedfc7` | Nostalgia, humanities, reading, literature |
 | 🌙 **Dune** | `#1f1a14` / `#f0e6d2` | Art, design, creative, fashion |
 | ⚫ **Midnight Ink** | `#0e0d0c` / `#ece2cf` / `#d4a04a` | Game key art / night scenes / cinematic covers / Black Myth · Elden Ring-style dark themes |
+| 🟨 **Jieni Gold** | `#050505` / `#f1efe8` / `#c9a45c` | AI / Harness / open-source / product / personal-brand imagery |
 
 ### Swiss (4)
 
@@ -253,7 +254,7 @@ Pick from [`references/theme-presets.md`](./references/theme-presets.md). **Cust
 | 🟢 **Lemon Green** | `#C5E803` | Eco, health, Gen Z, green brands |
 | 🟠 **Safety Orange** | `#FF6B35` | Alerts, news, industrial, energetic themes |
 
-To switch themes, just replace the `<section class="poster" data-theme="...">` attribute on the seed template; all CSS resolves through `var(--...)`.
+For Editorial, switch themes on the seed template root with `<html data-theme="...">`; all CSS resolves through `var(--...)`. For Swiss, choose the anchor color on the root with `<html data-accent="...">`.
 
 ## Directory
 
@@ -267,7 +268,7 @@ guizang-social-card-skill/
 ├── validate-social-deck.mjs              ← Playwright layout validator
 ├── scripts/                              ← Live Photo packaging / contact sheet / doc-test scripts
 ├── assets/
-│   ├── template-editorial-card.html      ← Editorial seed (6 themes / 3 canvases)
+│   ├── template-editorial-card.html      ← Editorial seed (7 themes / 3 canvases)
 │   ├── template-swiss-card.html          ← Swiss seed (4 accents / 3 canvases)
 │   ├── magazine-bg-webgl.js              ← WebGL ink-flow background
 │   └── screenshot-backgrounds/           ← 9 screenshot stage backgrounds (WebP)
@@ -276,7 +277,7 @@ guizang-social-card-skill/
 └── references/
     ├── platform-specs.md                 ← Platform × resolution × naming
     ├── style-system.md                   ← Hard rules and anti-patterns for both styles
-    ├── theme-presets.md                  ← All 10 palettes in detail
+    ├── theme-presets.md                  ← All 11 palettes in detail
     ├── layout-recipes.md                 ← 28 layout skeletons (M01-M16 + S01-S12)
     ├── components.md                     ← Type / cards / spacing / icons
     ├── background-systems.md             ← Ink flow / grid / paper layers
@@ -328,7 +329,7 @@ guizang-social-card-skill/
 Yes. A task directory's `index.html` can hold multiple `.poster` sections; `node render.mjs` screenshots each one. A 3-9 card Xiaohongshu set is the common case.
 
 **Why are custom colors disallowed?**
-Same reason as the PPT skill — the skill's core value is stable output. Free color picking breaks visual cohesion. Pick from the 10 presets only.
+Same reason as the PPT skill — the skill's core value is stable output. Free color picking breaks visual cohesion. Pick from the 11 presets only.
 
 **Can I use other models for image generation?**
 Yes. Image generation itself is out of scope. SKILL.md Step 4 spells out the sourcing protocol: user images → AI-generated → web sources. AI generation depends on whichever model your agent connects to.
@@ -351,7 +352,7 @@ Bugs, layout issues, new layout requests — Issues and PRs welcome. Priorities 
 
 - When editing seed templates, also update `references/components.md`'s correspondence table (sizes / spacing / weights)
 - When adding layouts, add the full recipe to `references/layout-recipes.md` (copy caps + minimum density)
-- When adding theme colors, also update the seed template's `[data-theme="..."]` block + `references/theme-presets.md`
+- When adding theme colors, also update the seed template's `[data-theme="..."]` / `[data-accent="..."]` blocks + `references/theme-presets.md`
 - When adding Swiss rules, also update the matching rule in `validate-social-deck.mjs`
 - Mistakes you've hit go into `references/qa-checklist.md`
 - Tests and demos live under `local-tests/` — do not pollute the skill root

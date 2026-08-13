@@ -88,7 +88,7 @@ Use for design, object studies, portfolio-like covers, gallery tone, and restrai
 
 ### Midnight Ink
 
-The **only** official dark Editorial palette. Use for game key art, night photography, cinematic covers, dark-themed cultural pieces — content whose source imagery is already dark and would be diminished by paper backgrounds. Do not improvise other dark palettes; if Midnight Ink does not fit, pick a different mode (Editorial dark is not a universal switch).
+Midnight Ink and Jieni Gold are the two sanctioned dark Editorial palettes with separate roles. Use Midnight Ink for game key art, night photography, cinematic covers, and dark cultural pieces — content whose source imagery is already dark and would be diminished by paper backgrounds. Use Jieni Gold for AI, Agent, Harness Engineering, open source, product launches, product commentary, and personal-brand covers. Do not improvise another dark palette.
 
 ```css
 :root {
@@ -124,6 +124,30 @@ Midnight Ink **must** also override two background layers — light-paper math d
 
 The seed `template-editorial-card.html` ships these overrides — just switch `data-theme` and they apply automatically.
 
+### Jieni Gold
+
+Use for AI, Agent, Harness Engineering, open source, product launches, product commentary, and personal-brand covers. It is the near-black Editorial route: warm white and grey type, sparse warm gold, and controlled cinematic light.
+
+```css
+:root {
+  --paper: #050505;
+  --paper-2: #0d0d0c;
+  --ink: #f1efe8;
+  --muted: #8a8780;
+  --line: rgba(201,164,92,.22);
+  --accent: #c9a45c;
+  --accent-soft: #2a2113;
+  --ink-rgb: 241,239,232;
+  --paper-rgb: 5,5,5;
+  --accent-rgb: 201,164,92;
+}
+```
+
+- Build atmosphere with fine screen-blended grain, localized haze, a vignette, and narrow rim light.
+- Use dark-background images with shallow depth of field, warm rim light, and a quiet zone for type.
+- Use one `.metal-gold` fragment per board.
+- Keep gold below roughly 10%; never use gold paragraphs, neon blue or purple, glass, large flares, or gold panels.
+
 Magazine palette rules:
 
 - Use `--paper` as the main background and `--ink` as primary type.
@@ -131,6 +155,7 @@ Magazine palette rules:
 - `--paper-2` can support photo wells, issue strips, or checklist bands.
 - Light palettes (the first five): do not turn into beige-on-beige. Maintain real contrast.
 - Midnight Ink: do not stack opaque cards or fills on the page. Dark Editorial relies on photo bleeds + warm gilt accent for hierarchy, not background blocks.
+- Jieni Gold: keep the near-black field open; let quiet image space, controlled haze, and one metallic fragment carry the hierarchy rather than gold panels.
 
 ## Swiss International Palettes
 

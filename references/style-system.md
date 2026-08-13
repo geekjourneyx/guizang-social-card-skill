@@ -29,7 +29,7 @@ Visual anchors:
 - Fine rules, magazine columns, image captions, pull quotes, and editorial contrast.
 - Subtle paper texture is allowed; it must not lower text readability.
 
-Use one of the 6 magazine palettes in `theme-presets.md`. Do not improvise arbitrary warm paper colors. Five palettes are light (paper-and-ink); one — **Midnight Ink** — is the only sanctioned dark variant, reserved for content where the source imagery is already dark (game art, night photography, cinematic covers). Do not invent a second dark palette.
+Use one of the 7 magazine palettes in `theme-presets.md`. Do not improvise arbitrary warm paper or dark colors. Five palettes are light; two sanctioned dark palettes have separate roles: **Midnight Ink** for game art, night photography, and dark cultural imagery, and **Jieni Gold** for AI, Agent, Harness Engineering, open-source launches, product commentary, and personal-brand covers. Do not invent a third dark palette.
 
 **Typography stance — "the larger, the lighter."** This rule is non-negotiable for Editorial. Display titles run at **weight 500** with **wide tracking** (`+.03em` to `+.04em`). Small text (kicker, meta, label) is the *only* place where weight 500 is paired with mono uppercase and wide letter-spacing (`+.20em` to `+.22em`). Body uses **serif-zh**, not sans. The anti-pattern — 700 to 900 weight display, sans body, negative tracking — collapses Editorial into a generic "infographic banner" look. If a page feels heavy or shouty, the title is too bold or the body switched to sans. See `local-tests/demo-showcase/editorial.html` for source-of-truth.
 
