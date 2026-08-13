@@ -18,7 +18,7 @@
          .pair-preview                       21:9 + 1:1 配对预览
 
        Theme switching via <html data-theme="…">:
-         ink-classic | indigo-porcelain | forest-ink | kraft-paper | dune | midnight-ink
+         ink-classic | indigo-porcelain | forest-ink | kraft-paper | dune | jieni-ivory | midnight-ink | jieni-gold
 
        Fill posters where marked <!-- POSTERS_HERE -->.
        Each poster carries one Layout Recipe (M01-M15) from
@@ -87,9 +87,21 @@
       --paper-rgb: 240,230,210;
       --accent-rgb: 143,118,80;
     }
-    /* Midnight Ink — the ONLY official dark Editorial palette.
-       Use for game key art, night scenes, dark photography, cinematic covers.
-       Do not improvise other dark backgrounds. */
+    [data-theme="jieni-ivory"] {
+      --paper:     #f3efe6;
+      --paper-2:   #e8e1d5;
+      --ink:       #171612;
+      --muted:     #625d54;
+      --line:      rgba(23,22,18,.18);
+      --accent:    #845b20;
+      --accent-soft: #ded0b5;
+      --ink-rgb: 23,22,18;
+      --paper-rgb: 243,239,230;
+      --accent-rgb: 132,91,32;
+    }
+    /* Midnight Ink — dark Editorial palette for game key art, night scenes,
+       dark photography, and cinematic covers.
+       Do not improvise unapproved dark backgrounds. */
     [data-theme="midnight-ink"] {
       --paper:     #0e0d0c;
       --paper-2:   #1a1714;
@@ -101,6 +113,18 @@
       --ink-rgb: 236,226,207;
       --paper-rgb: 14,13,12;
       --accent-rgb: 212,160,74;
+    }
+    [data-theme="jieni-gold"] {
+      --paper:     #050505;
+      --paper-2:   #0d0d0c;
+      --ink:       #f1efe8;
+      --muted:     #8a8780;
+      --line:      rgba(201,164,92,.22);
+      --accent:    #c9a45c;
+      --accent-soft: #2a2113;
+      --ink-rgb: 241,239,232;
+      --paper-rgb: 5,5,5;
+      --accent-rgb: 201,164,92;
     }
 
     /* ---------- 2. Typography stack ---------- */
@@ -189,6 +213,73 @@
         radial-gradient(70% 60% at 80% 86%, rgba(60,40,20,.20), transparent 72%),
         linear-gradient(180deg, rgba(236,226,207,.02), rgba(0,0,0,.32));
     }
+    [data-theme="jieni-ivory"] .grain {
+      opacity: .12;
+      mix-blend-mode: multiply;
+      background-image: radial-gradient(rgba(23,22,18,.11) .55px, transparent .7px);
+      background-size: 3px 3px;
+    }
+    [data-theme="jieni-ivory"] .paper-wash {
+      background:
+        radial-gradient(68% 42% at 18% 16%, rgba(132,91,32,.075), transparent 68%),
+        radial-gradient(62% 50% at 82% 72%, rgba(23,22,18,.035), transparent 74%),
+        linear-gradient(180deg, rgba(255,255,255,.11), rgba(23,22,18,.025));
+    }
+    [data-theme="jieni-ivory"] canvas.mag-bg {
+      opacity: .07;
+      mix-blend-mode: multiply;
+      -webkit-mask-image: radial-gradient(ellipse 62% 50% at 18% 78%, #000 0%, rgba(0,0,0,.68) 40%, transparent 78%);
+      mask-image: radial-gradient(ellipse 62% 50% at 18% 78%, #000 0%, rgba(0,0,0,.68) 40%, transparent 78%);
+    }
+    [data-theme="jieni-ivory"] .frame-img,
+    [data-theme="jieni-ivory"] .frame-shot {
+      background: #e4dccf;
+      box-shadow:
+        0 0 0 1px rgba(132,91,32,.22),
+        0 18px 48px rgba(23,22,18,.12);
+    }
+    html[data-theme="jieni-gold"] .grain,
+    .poster[data-theme="jieni-gold"] .grain {
+      opacity: .18;
+      mix-blend-mode: screen;
+      background-image: radial-gradient(rgba(241,239,232,.075) .7px, transparent .8px);
+      background-size: 3px 3px;
+    }
+    html[data-theme="jieni-gold"] .paper-wash,
+    .poster[data-theme="jieni-gold"] .paper-wash {
+      background:
+        radial-gradient(72% 46% at 22% 18%, rgba(201,164,92,.12), transparent 66%),
+        radial-gradient(58% 54% at 78% 58%, rgba(241,239,232,.055), transparent 72%),
+        linear-gradient(180deg, rgba(241,239,232,.012), rgba(0,0,0,.42));
+    }
+    html[data-theme="jieni-gold"] canvas.mag-bg,
+    .poster[data-theme="jieni-gold"] canvas.mag-bg {
+      opacity: .16;
+      -webkit-mask-image: radial-gradient(ellipse 64% 52% at 18% 78%, #000 0%, rgba(0,0,0,.72) 38%, transparent 76%);
+      mask-image: radial-gradient(ellipse 64% 52% at 18% 78%, #000 0%, rgba(0,0,0,.72) 38%, transparent 76%);
+    }
+    html[data-theme="jieni-gold"] canvas.mag-bg,
+    .poster[data-theme="jieni-gold"] canvas.mag-bg {
+      mix-blend-mode: screen;
+    }
+    html[data-theme="jieni-gold"] .frame-img,
+    html[data-theme="jieni-gold"] .frame-shot,
+    .poster[data-theme="jieni-gold"] .frame-img,
+    .poster[data-theme="jieni-gold"] .frame-shot {
+      background: #080808;
+      box-shadow:
+        0 0 0 1px rgba(201,164,92,.24),
+        0 18px 56px rgba(0,0,0,.52),
+        0 0 32px rgba(201,164,92,.06);
+    }
+    html[data-theme="jieni-gold"] .metal-gold,
+    .poster[data-theme="jieni-gold"] .metal-gold {
+      color: var(--accent);
+      background: linear-gradient(105deg, #8a672d 0%, #c9a45c 42%, #ead596 58%, #a77d38 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
     /* ---------- 6. Typography roles ----------
        Editorial Magazine values restored from demo-showcase/editorial.html:
@@ -203,6 +294,10 @@
       text-transform: uppercase;
       color: rgba(var(--ink-rgb), .55);
       margin: 0 0 18px;
+    }
+    html[data-theme="jieni-ivory"] .kicker:not(.poster[data-theme="jieni-gold"] .kicker),
+    .poster[data-theme="jieni-ivory"] .kicker {
+      color: var(--muted);
     }
     .h-display {
       font-family: var(--serif-zh);
@@ -268,6 +363,12 @@
       letter-spacing: .20em;
       text-transform: uppercase;
       color: rgba(var(--ink-rgb), .55);
+    }
+    html[data-theme="jieni-ivory"] .meta:not(.poster[data-theme="jieni-gold"] .meta),
+    html[data-theme="jieni-ivory"] .label:not(.poster[data-theme="jieni-gold"] .label),
+    .poster[data-theme="jieni-ivory"] .meta,
+    .poster[data-theme="jieni-ivory"] .label {
+      color: var(--muted);
     }
     .pullquote {
       font-family: var(--serif-zh);
@@ -402,6 +503,20 @@
     /* shadows — Editorial uses warm low-contrast drop */
     .frame-shot.shadow-soft { box-shadow: 0 18px 36px -18px rgba(20,18,14,.22), 0 2px 6px rgba(20,18,14,.06); }
     .frame-shot.shadow-ed   { box-shadow: 0 28px 60px -24px rgba(20,18,14,.32), 0 6px 14px rgba(20,18,14,.08); }
+    html[data-theme="jieni-ivory"] .frame-shot.shadow-soft:not(.poster[data-theme="jieni-gold"] .frame-shot),
+    .poster[data-theme="jieni-ivory"] .frame-shot.shadow-soft {
+      box-shadow:
+        0 0 0 1px rgba(132,91,32,.22),
+        0 18px 36px -18px rgba(20,18,14,.22),
+        0 2px 6px rgba(20,18,14,.06);
+    }
+    html[data-theme="jieni-ivory"] .frame-shot.shadow-ed:not(.poster[data-theme="jieni-gold"] .frame-shot),
+    .poster[data-theme="jieni-ivory"] .frame-shot.shadow-ed {
+      box-shadow:
+        0 0 0 1px rgba(132,91,32,.22),
+        0 28px 60px -24px rgba(20,18,14,.32),
+        0 6px 14px rgba(20,18,14,.08);
+    }
 
     /* background tones — programmatic, no asset deps */
     .frame-shot.bg-paper    { background: var(--paper); }
@@ -590,6 +705,21 @@
     }
     .map-legend.tr { left: auto; right: 14px; top: 14px; bottom: auto; }
 
+    [data-theme="jieni-ivory"] .map-pin .card {
+      background: rgba(var(--paper-rgb),.94);
+    }
+    [data-theme="jieni-ivory"] .map-legend {
+      background: rgba(var(--paper-rgb),.92);
+    }
+    html[data-theme="jieni-gold"] .map-pin .card,
+    .poster[data-theme="jieni-gold"] .map-pin .card {
+      background: rgba(var(--paper-rgb),.94);
+    }
+    html[data-theme="jieni-gold"] .map-legend,
+    .poster[data-theme="jieni-gold"] .map-legend {
+      background: rgba(var(--paper-rgb),.92);
+    }
+
     /* ---------- 10. Editorial components ---------- */
     .callout {
       border-left: 3px solid var(--accent);
@@ -701,6 +831,16 @@
       border-left: 3px solid var(--accent);
     }
     .beforeafter .ba-block.before { opacity: .68; }
+    [data-theme="jieni-ivory"] .beforeafter .ba-block.before {
+      opacity: 1;
+      border-left-color: rgba(var(--accent-rgb),.52);
+    }
+    html[data-theme="jieni-gold"] .beforeafter .ba-block.before,
+    .poster[data-theme="jieni-gold"] .beforeafter .ba-block.before {
+      opacity: 1;
+      background: var(--paper);
+      border-left-color: rgba(var(--accent-rgb),.52);
+    }
 
     /* ---------- 11. Pair preview frame ---------- */
     .pair-preview {
@@ -756,7 +896,7 @@
 <body>
   <!-- THEME_OVERRIDE
        Change <html data-theme="…"> above to:
-       ink-classic | indigo-porcelain | forest-ink | kraft-paper | dune | midnight-ink
+       ink-classic | indigo-porcelain | forest-ink | kraft-paper | dune | jieni-ivory | midnight-ink | jieni-gold
   -->
   <main class="sheet">
 
@@ -809,18 +949,19 @@
   <script src="assets/magazine-bg-webgl.js"></script>
   <script>
     (function () {
-      function cssVarRgb(name, fallback) {
-        var raw = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+      function cssVarRgb(scope, name, fallback) {
+        var raw = getComputedStyle(scope).getPropertyValue(name).trim();
         if (!raw) return fallback;
         var parts = raw.split(',').map(function (x) { return parseInt(x.trim(), 10); });
         return parts.length === 3 && parts.every(function (n) { return !isNaN(n); }) ? parts : fallback;
       }
       function mountAll() {
         if (!window.MagazineBg || !window.MagazineBg.mount) return;
-        var ink    = cssVarRgb('--ink-rgb',    [10, 10, 11]);
-        var paper  = cssVarRgb('--paper-rgb',  [243, 240, 232]);
-        var accent = cssVarRgb('--accent-rgb', [17, 17, 17]);
         document.querySelectorAll('canvas.mag-bg').forEach(function (c) {
+          var scope  = c.closest('[data-theme]') || document.documentElement;
+          var ink    = cssVarRgb(scope, '--ink-rgb',    [10, 10, 11]);
+          var paper  = cssVarRgb(scope, '--paper-rgb',  [243, 240, 232]);
+          var accent = cssVarRgb(scope, '--accent-rgb', [17, 17, 17]);
           window.MagazineBg.mount(c, {
             ink: ink,
             paper: paper,

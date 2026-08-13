@@ -154,10 +154,10 @@ Do not mix the two visual systems inside the same image set unless the user expl
 
 Then pick one theme:
 
-- Editorial Magazine x E-ink uses one of 6 magazine palettes: Ink Classic, Indigo Porcelain, Forest Ink, Kraft Paper, Dune, or Midnight Ink (the only dark variant; reserved for game key art / night photography / cinematic covers).
+- Editorial Magazine x E-ink uses one of 8 magazine palettes: Ink Classic, Indigo Porcelain, Forest Ink, Kraft Paper, Dune, Jieni Ivory, Midnight Ink, or Jieni Gold. For the Jieni brand family, use Jieni Ivory for tutorials, explainers, screenshots, processes, data, and sustained mobile reading; use Jieni Gold for sparse launch covers, cinematic hero statements, and brand closes. A multi-page instructional package uses `jieni-ivory` on the root and may use `jieni-gold` only on the first and/or last poster, never for variety.
 - Swiss International uses one of 4 accent palettes: IKB Blue, Lemon Yellow, Lemon Green, or Safety Orange.
 
-Read `references/theme-presets.md` for exact CSS tokens. Do not invent arbitrary colors unless the user has a strict brand requirement.
+Read `references/theme-presets.md` for exact CSS tokens. Use one of the 12 verified presets. Do not invent arbitrary colors.
 
 ### 4. Plan Pages
 
@@ -194,7 +194,7 @@ The seed already wires up: font loading, theme tokens, all three poster sizes (`
 
 Set the theme/accent on the `<html>` element:
 
-- Editorial: `<html data-theme="ink-classic | indigo-porcelain | forest-ink | kraft-paper | dune | midnight-ink">`.
+- Editorial: `<html data-theme="ink-classic | indigo-porcelain | forest-ink | kraft-paper | dune | jieni-ivory | midnight-ink | jieni-gold">`.
 - Swiss: `<html data-accent="ikb | lemon-yellow | lemon-green | safety-orange">`.
 
 Replace the single placeholder poster after `<!-- POSTERS_HERE -->` with one `<section class="poster ...">` block per page, each carrying the HTML skeleton from a chosen Layout Recipe (M01-M16 for Editorial, S01-S12 for Swiss). Never load the wrong template's class system: Editorial recipes assume serif display + ledger/marginalia/pipeline-v; Swiss recipes assume Inter + card-fills + matrix/h-bar/kpi-tower. Mixing them silently breaks the layout.

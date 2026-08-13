@@ -1,6 +1,6 @@
 # Handoff — guizang-social-card-skill
 
-最后更新：2026-07-01 · 版本：v0.15（Live Photo 生产规则：3s/5s 平台限制、拼图版式、长视频处理、发布提醒、可见文案与不自造规则）
+最后更新：2026-08-13 · 版本：v0.17（Jieni Ivory 阅读优先路由、Jieni 家族受限首尾 Gold 例外、当前主题真相）
 
 这份文档只记录**事实**：当前 skill 由哪些文件组成、每个文件管什么、本轮更新改了什么、怎么验证它还能跑。想读"为什么这样做"或"未来要怎么走"，去看 `PRODUCT.md`。
 
@@ -25,7 +25,7 @@ guizang-social-card-skill/
 ├── references/                # 子规范，按需读取
 │   ├── platform-specs.md      平台 × 分辨率 × 命名
 │   ├── style-system.md        两种风格的硬规则与反模式
-│   ├── theme-presets.md       6 套杂志 palette（含 Midnight Ink）+ 4 套 Swiss accent
+│   ├── theme-presets.md       8 套杂志 palette（6 浅 + 2 暗，含 Jieni Ivory / Midnight Ink / Jieni Gold）+ 4 套 Swiss accent
 │   ├── layout-recipes.md      版式骨架（M01-M16 + S01-S12 + WeChat）
 │   ├── components.md          字体 / 卡片 / 间距 / 图标 / 标题字数表
 │   ├── background-systems.md  墨流 / 网格 / 纸纹层
@@ -70,7 +70,7 @@ v0.13 起：git 仓库。`local-tests/` 整目录在 `.gitignore` 中，commit �
 | --- | --- |
 | 工作流步骤 | 7 步（Intake → Extract → Style → Plan → Seed → Build → Image → Deliver） |
 | 风格模式 | 2 个（Editorial Magazine × E-ink / Swiss International） |
-| 主题色 | Editorial 6 套（5 浅 + 1 暗 Midnight Ink）+ Swiss 4 套 = 10 套 |
+| 主题色 | Editorial 8 套（6 浅 + 2 暗）+ Swiss 4 套 = 12 套 |
 | 版式骨架 | Editorial 16 个（M01-M16）+ Swiss 12 个（S01-S12）= 28 个 |
 | 平台 × 比例 | 小红书 3:4 / 1:1，微信 21:9 + 1:1 配对，方封面 1:1 |
 | 小红书品类覆盖 | 11 个品类中 7 个完整支持，4 个需用户提供素材，4 个明确不接 |
@@ -83,6 +83,32 @@ v0.13 起：git 仓库。`local-tests/` 整目录在 `.gitignore` 中，commit �
 ## 3. 版本历史
 
 仅记录"什么时候新增/变更了哪些可见资产"，不记录文风调整。
+
+### v0.17 · 2026-08-13（本轮）
+
+主题：**Jieni Ivory 阅读优先路由与受限家族序列**。
+
+**新增与修正**
+- 新增 **Jieni Ivory**：Jieni Gold 的浅色、阅读优先同族 palette，服务教程、解释、截图、流程、数据和持续移动阅读；当前主题覆盖为 Editorial 8 套（6 浅 + 2 暗）+ Swiss 4 套 = 12 套。
+- `SKILL.md`、`references/theme-presets.md` 与 `references/style-system.md` 明确按信息密度路由：Ivory 是多页说明内容的根主题；Gold 仅用于稀疏发布封面、电影感 hero 与品牌收束。
+- 一套 Jieni 家族组图最多两张 Gold，通常为首张封面与最后品牌卡；其余未标记 poster 继承 Ivory。这是唯一允许的逐 poster palette 例外，其他 palette 混用仍然禁止。
+- README 中的通用切换示例继续只在根 `<html>` 上设置主题；仅 Jieni 家族示例展示精确的 `jieni-gold` 首尾 section 覆盖。`scripts/check-skill-docs.mjs` 同时锁定当前 8/12 计数、受限例外与历史计数不被改写。
+
+**历史保留**
+- v0.16 的 11 套当前事实、v0.12 的 `5 → 6`，以及 v0.6 的 `5 + 4 = 9` 都保留在各自的历史版本段落中；它们不是当前覆盖面。
+
+### v0.16 · 2026-08-13（本轮）
+
+主题：**Jieni Gold 进入当前主题真相，并同步切换和验证约定**。
+
+**新增与修正**
+- 新增 **Jieni Gold**：第二套暗色 Editorial palette，服务 AI / Harness / 开源 / 产品 / 个人品牌图像；与 Midnight Ink 的游戏 / 夜景 / 文化图像分工并存。当前主题覆盖为 Editorial 7 套（5 浅 + 2 暗）+ Swiss 4 套 = 11 套。
+- README 中的主题切换示例统一改为根 `<html data-theme="...">`；Swiss 锚点色统一使用根 `<html data-accent="...">`，不再把 `data-theme` 放在单张 `.poster` 上。
+- `scripts/check-skill-docs.mjs` 增加确定性文档契约：锁定 11 套当前主题、Jieni Gold 条目与根元素切换写法。
+- 增加三比例（3:4 / 21:9 / 1:1）视觉夹具，用于验证 Jieni Gold 在各画板上的呈现。
+
+**历史保留**
+- v0.12 的 Midnight Ink 从 5 套浅色扩到第 6 套 Editorial 的记录，以及更早的 `5 + 4 = 9` 计数，均为当时事实，未改写。
 
 ### v0.15 · 2026-07-01（本轮）
 
@@ -398,7 +424,8 @@ v0.13 起：git 仓库。`local-tests/` 整目录在 `.gitignore` 中，commit �
 先跑文档层验证，确认 Skill Creator 基础格式和本仓库约束都还成立：
 
 ```bash
-python3 /Users/guohao/.agents/skills/skill-creator/scripts/quick_validate.py .
+: "${SKILL_CREATOR_DIR:?Set SKILL_CREATOR_DIR to your skill-creator installation}"
+python3 "$SKILL_CREATOR_DIR/scripts/quick_validate.py" .
 npm run test:docs
 ```
 
@@ -407,23 +434,27 @@ npm run test:docs
 最快的验证路径，不要发明新需求。
 
 ```bash
-cd /Users/guohao/Documents/code/HyperFrames-test/guizang-social-card-skill/local-tests/smoke-ai-tools
-node render.mjs
-ls output/   # 应该看到 xhs-01.png ... xhs-05.png
-sips -g pixelWidth -g pixelHeight output/xhs-01.png   # 应为 1080×1440
+(
+  cd local-tests/smoke-ai-tools
+  node render.mjs
+  ls output/   # 应该看到 xhs-01.png ... xhs-05.png
+  sips -g pixelWidth -g pixelHeight output/xhs-01.png   # 应为 1080×1440
+)
 ```
 
 5 张图都能渲染、尺寸都对 → Swiss 种子模板 + 5 个 recipe 工作正常。
 
-视觉验收：用 `Read` 工具读 `output/xhs-04.png`，确认大数字 "8" 在右下角完整可见、未被截断。
+视觉验收：用 `Read` 工具读 `local-tests/smoke-ai-tools/output/xhs-04.png`，确认大数字 "8" 在右下角完整可见、未被截断。
 
 更全的 demo：`local-tests/demo-image-02-wukong/index.html` 用 Playwright 渲染，验证 image-overlay 规则下文字与人物未冲突。
 
 Live Photo 视觉回归可以直接看本地测试目录：
 
 ```bash
-cd /Users/guohao/Documents/code/HyperFrames-test/guizang-social-card-skill/local-tests/live-photo-best-suite/puzzle-layouts
-ls output/
+(
+  cd local-tests/live-photo-best-suite/puzzle-layouts
+  ls output/
+)
 ```
 
 重点看 `contact-sheet-*.jpg` 和四个 `IMG_XHS_PUZZLE_*_LIVE.MOV`。不要重新开新目录，除非用户明确要新的测试集。

@@ -62,7 +62,7 @@ npx skills add https://github.com/op7418/guizang-social-card-skill --skill guiza
 - 📐 **3 个画板尺寸**:`.poster.xhs` 1080×1440(小红书 3:4)、`.poster.wide` 2100×900(公众号 21:9)、`.poster.square` 1080×1080(公众号 1:1)
 - 🎬 **Live Photo 动态卡**:支持单视频、二宫格、三宫格、四宫格、三连拼图、长视频低成本诊断;小红书按 `5s`,微信公众号文章内按 `3s`
 - 🧩 **28 个版式骨架**:Editorial 16 个(`M01-M16`,含 Image-Led Cover、Pipeline、Before/After 等)+ Swiss 12 个(`S01-S12`,含 KPI Tower、H-Bar Chart、Matrix + Hero 等)
-- 🎨 **10 套主题预设**:Editorial 6 套(墨水经典、靛蓝瓷、森林墨、牛皮纸、沙丘、**Midnight Ink** 暗色)+ Swiss 4 套锚点色(IKB Klein Blue、柠檬黄、柠檬绿、安全橙)
+- 🎨 **12 套主题预设**:Editorial 8 套（6 浅 + 2 暗；墨水经典、靛蓝瓷、森林墨、牛皮纸、沙丘、**Jieni Ivory**、**Midnight Ink**、**Jieni Gold**）+ Swiss 4 套锚点色(IKB Klein Blue、柠檬黄、柠檬绿、安全橙)
 - 🖼 **图源工作流**:用户图优先;无图时按 Unsplash → Pexels → Flickr CC → Wallhaven → 直接搜索的优先级取图,落本地 + 自动写 `SOURCES.md`
 - 🌫 **WebGL 墨流背景**:杂志风 hero 页可挂动态墨流;低性能或截图时可禁用
 - 🪧 **文字压图 + 主体避让**:满铺图先做 quiet-zone 与主体映射,文字避开人脸、产品和关键动作;需要时只加局部 tint,不默认全图遮罩
@@ -198,7 +198,7 @@ git clone https://github.com/op7418/guizang-social-card-skill.git ~/.claude/skil
 Skill 本身是结构化工作流,Agent 会按 7 步走:
 
 1. **Intake** — 抓 4 件事:目标平台 / 风格 / 内容素材 / 用户图。无图时一次性给 A/B/C 三选(自己拍图 / AI 生图 / 网络取图),不二次劝导
-2. **Style & Theme** — 选 Editorial 还是 Swiss,再从 10 套预设里选主题色。不允许自定义 hex
+2. **Style & Theme** — 选 Editorial 还是 Swiss,再从 12 套预设里选主题色。不允许自定义 hex
 3. **Layout Selection** — 根据内容结构从 28 个版式骨架里挑、粘、改文案。Editorial 16 个 / Swiss 12 个
 4. **Asset Prep** — 取图(Unsplash / Pexels / Flickr CC / Wallhaven / 直接搜索),落本地 + 写 `SOURCES.md`;问用户要不要标来源
 5. **Compose & Render** — 拷种子模板 → 替换 `<!-- POSTERS_HERE -->` → `node render.mjs`
@@ -233,7 +233,7 @@ node validate-social-deck.mjs path/to/task-dir
 
 从 [`references/theme-presets.md`](./references/theme-presets.md) 里选一套——**不允许自定义 hex 值**,保护美学比给自由更重要。
 
-### Editorial 6 套
+### Editorial 8 套（6 浅 + 2 暗）
 
 | 主题 | 色调 | 适合场景 |
 |------|------|---------|
@@ -242,7 +242,9 @@ node validate-social-deck.mjs path/to/task-dir
 | 🌿 **森林墨 Forest Ink** | `#1a2e1f` / `#f5f1e8` | 自然、可持续、户外、非虚构 |
 | 🍂 **牛皮纸 Kraft Paper** | `#2a1e13` / `#eedfc7` | 怀旧、人文、阅读、文学 |
 | 🌙 **沙丘 Dune** | `#1f1a14` / `#f0e6d2` | 艺术、设计、创意、时尚 |
+| 🤍 **杰尼象牙 Jieni Ivory** | `#f3efe6` / `#171612` / `#845b20` | 教程、解释、截图、流程、数据、长时间移动阅读 |
 | ⚫ **午夜墨 Midnight Ink** | `#0e0d0c` / `#ece2cf` / `#d4a04a` | 游戏 key art / 夜景 / 影调封面 / 黑神话 · 艾尔登法环类深色题材 |
+| 🟨 **杰尼金 Jieni Gold** | `#050505` / `#f1efe8` / `#c9a45c` | 稀疏发布封面 / 电影感 hero / 品牌收束 |
 
 ### Swiss 4 套
 
@@ -253,7 +255,17 @@ node validate-social-deck.mjs path/to/task-dir
 | 🟢 **柠檬绿 Lemon Green** | `#C5E803` | 生态、健康、Z 世代、绿色品牌 |
 | 🟠 **安全橙 Safety Orange** | `#FF6B35` | 警示、新闻、工业、活力主题 |
 
-切主题只需替换种子模板的 `<section class="poster" data-theme="...">` 属性,所有 CSS 走 `var(--...)`。
+Editorial 切主题只需替换种子模板根 `<html data-theme="...">` 属性,所有 CSS 走 `var(--...)`。Swiss 则在根 `<html data-accent="...">` 选择锚点色。
+
+Jieni 教程组图以 Ivory 为根；只有首张封面和/或最后一张品牌收束可覆盖为 Gold，不能为了变化而混用：
+
+```html
+<html lang="zh-CN" data-theme="jieni-ivory">
+  <section class="poster xhs" data-theme="jieni-gold">...</section>
+  <section class="poster xhs">...</section>
+  <section class="poster xhs" data-theme="jieni-gold">...</section>
+</html>
+```
 
 ## 目录结构
 
@@ -266,7 +278,7 @@ guizang-social-card-skill/
 ├── validate-social-deck.mjs              ← Playwright 版式校验脚本
 ├── scripts/                              ← Live Photo 打包 / 抽帧 / 文档测试脚本
 ├── assets/
-│   ├── template-editorial-card.html      ← Editorial 种子(6 主题 / 3 画板)
+│   ├── template-editorial-card.html      ← Editorial 种子(8 主题 / 3 画板)
 │   ├── template-swiss-card.html          ← Swiss 种子(4 accent / 3 画板)
 │   ├── magazine-bg-webgl.js              ← WebGL 墨流背景
 │   └── screenshot-backgrounds/           ← 9 张截图舞台底(WebP)
@@ -275,7 +287,7 @@ guizang-social-card-skill/
 └── references/
     ├── platform-specs.md                 ← 平台 × 分辨率 × 命名
     ├── style-system.md                   ← 两种风格的硬规则与反模式
-    ├── theme-presets.md                  ← 10 套色票详解
+    ├── theme-presets.md                  ← 12 套色票详解
     ├── layout-recipes.md                 ← 28 个版式骨架(M01-M16 + S01-S12)
     ├── components.md                     ← 字体 / 卡片 / 间距 / 图标
     ├── background-systems.md             ← 墨流 / 网格 / 纸纹层
@@ -327,7 +339,7 @@ guizang-social-card-skill/
 可以。一个 task 目录下的 `index.html` 包含多个 `.poster`,`node render.mjs` 会逐个截 PNG。一次出小红书 3-9 张组图很常见。
 
 **为什么不允许自定义颜色?**
-和 PPT skill 同样的理由——这个 Skill 的核心价值是稳定产出。自由选色会破坏整体风格,只允许从 10 套预设里挑。
+和 PPT skill 同样的理由——这个 Skill 的核心价值是稳定产出。自由选色会破坏整体风格,只允许从 12 套预设里挑。
 
 **能用其他模型生图吗?**
 可以。生图本身不在 Skill 范围内,但 SKILL.md Step 4 写清了取图协议:用户图 → AI 生图 → 网络取图。AI 生图能力依赖你当前 Agent 接的模型。
@@ -350,7 +362,7 @@ Bug、排版问题、新版式需求——欢迎开 Issue 或 PR。改动请优�
 
 - 改种子模板时,同步更新 `references/components.md` 的对照表(字号 / 字距 / 字重)
 - 新增版式时,在 `references/layout-recipes.md` 加完整 recipe(文案上限 + minimum density)
-- 新增主题色时,同步更新种子模板的 `[data-theme="..."]` 块 + `references/theme-presets.md`
+- 新增主题色时,同步更新种子模板的 `[data-theme="..."]` / `[data-accent="..."]` 块 + `references/theme-presets.md`
 - 新增 Swiss 规则时,同步更新 `validate-social-deck.mjs` 的对应规则
 - 踩过的坑写到 `references/qa-checklist.md`
 - 测试与 demo 一律放在 `local-tests/` 下,不要污染 skill 根目录
