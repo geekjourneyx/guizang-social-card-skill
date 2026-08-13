@@ -1,6 +1,6 @@
 # Theme Presets
 
-Use one theme for one image package. Do not mix palettes across pages unless the user explicitly asks for a deliberate multi-chapter system.
+Use one theme for one image package. The only sanctioned exception is a deliberate Jieni family sequence: an Ivory-root package may use Jieni Gold only on its first and/or last poster as specified below. Do not mix any other palettes across pages, including for a deliberate multi-chapter system.
 
 ## Editorial Magazine x E-ink Palettes
 
@@ -86,9 +86,69 @@ Use for design, object studies, portfolio-like covers, gallery tone, and restrai
 }
 ```
 
+### Jieni Ivory
+
+Use for Jieni-family tutorials, explainers, screenshots, processes, data, long carousels, and WeChat infographics when sustained mobile reading or information density matters. It is the light, reading-first companion to Jieni Gold: warm ivory paper, black ink, restrained antique gold, and a bright editorial reading surface.
+
+```css
+[data-theme="jieni-ivory"] {
+  --paper: #f3efe6;
+  --paper-2: #e8e1d5;
+  --ink: #171612;
+  --muted: #625d54;
+  --line: rgba(23,22,18,.18);
+  --accent: #845b20;
+  --accent-soft: #ded0b5;
+  --ink-rgb: 23,22,18;
+  --paper-rgb: 243,239,230;
+  --accent-rgb: 132,91,32;
+}
+```
+
+Contrast is a hard acceptance gate:
+
+| Foreground | On `#f3efe6` | On `#e8e1d5` | Required use |
+| --- | ---: | ---: | --- |
+| Ink `#171612` | 15.78:1 | 13.93:1 | Body, headings, captions |
+| Muted `#625d54` | 5.70:1 | 5.03:1 | Metadata and supporting copy |
+| Accent `#845b20` | 5.23:1 | 4.62:1 | Small labels, numbers, rules, highlights |
+
+- Normal text and captions must be at least 4.5:1 after alpha and ancestor-opacity composition; large display text and non-text graphical emphasis must be at least 3:1.
+- Validate at full export size and 360px-wide thumbnails. Do not create cream-on-cream text, low-opacity gold captions, or group opacity that pushes text below the threshold.
+
+Material rules:
+
+- Use fine, low-opacity paper grain with `multiply` blending; it is material, never noise over small text.
+- Use a localized warm wash, extremely subtle edge vignette, and optional low-opacity localized WebGL atmosphere; never reuse dark-theme volumetric fog or a page-wide glow.
+- Use thin antique-gold or ink rules, plus a soft editorial shadow and 1px warm outline around screenshots and images. Do not lower source-image brightness globally.
+- Use solid `--accent` on Ivory; the dark theme's metallic text gradient is not the default light-theme treatment.
+
+Anti-patterns:
+
+- Keep gold below roughly 8% of the board. Large reading surfaces stay ivory: no gold panels or extensive tan cards.
+- Avoid pure white, yellow cream, pink-beige, rounded lifestyle cards, tape/sticker decoration, glassmorphism, neon, and luxury-product gloss.
+- Preserve Editorial serif display, light weights, and disciplined spacing. Negative space must support hierarchy, not reduce necessary body copy below current font-size limits.
+
+The standard architecture remains a package-wide root theme:
+
+```html
+<html lang="zh-CN" data-theme="jieni-ivory">
+```
+
+A deliberate Jieni family package may use at most two Gold posters, normally the first cover and final brand card; every unmarked body poster inherits Jieni Ivory. This is the only sanctioned per-poster palette exception.
+
+```html
+<html lang="zh-CN" data-theme="jieni-ivory">
+  <section class="poster xhs" data-theme="jieni-gold">...</section>
+  <section class="poster xhs">...</section>
+  <section class="poster xhs">...</section>
+  <section class="poster xhs" data-theme="jieni-gold">...</section>
+</html>
+```
+
 ### Midnight Ink
 
-Midnight Ink and Jieni Gold are the two sanctioned dark Editorial palettes with separate roles. Use Midnight Ink for game key art, night photography, cinematic covers, and dark cultural pieces — content whose source imagery is already dark and would be diminished by paper backgrounds. Use Jieni Gold for AI, Agent, Harness Engineering, open source, product launches, product commentary, and personal-brand covers. Do not improvise another dark palette.
+Midnight Ink and Jieni Gold are the two sanctioned dark Editorial palettes with separate roles. Use Midnight Ink for game key art, night photography, cinematic covers, and dark cultural pieces — content whose source imagery is already dark and would be diminished by paper backgrounds. Use Jieni Gold for sparse launch covers, cinematic hero statements, and brand closes; use Jieni Ivory for tutorials, explainers, screenshots, processes, data, and sustained mobile reading. Do not improvise another dark palette.
 
 ```css
 :root {
@@ -126,7 +186,7 @@ The seed `template-editorial-card.html` ships these overrides — just switch `d
 
 ### Jieni Gold
 
-Use for AI, Agent, Harness Engineering, open source, product launches, product commentary, and personal-brand covers. It is the near-black Editorial route: warm white and grey type, sparse warm gold, and controlled cinematic light.
+Use Jieni Gold for sparse launch covers, cinematic hero statements, and brand closes. Use Jieni Ivory for Jieni-family tutorials, explainers, screenshots, processes, data, and sustained mobile reading. Gold is the near-black Editorial route: warm white and grey type, sparse warm gold, and controlled cinematic light.
 
 ```css
 :root {
@@ -153,7 +213,7 @@ Magazine palette rules:
 - Use `--paper` as the main background and `--ink` as primary type.
 - Use `--accent` sparingly: section marker, page number, pull quote rule, or one highlighted phrase.
 - `--paper-2` can support photo wells, issue strips, or checklist bands.
-- Light palettes (the first five): do not turn into beige-on-beige. Maintain real contrast.
+- Light palettes (the first six): do not turn into beige-on-beige. Maintain real contrast.
 - Midnight Ink: do not stack opaque cards or fills on the page. Dark Editorial relies on photo bleeds + warm gilt accent for hierarchy, not background blocks.
 - Jieni Gold: keep the near-black field open; let quiet image space, controlled haze, and one metallic fragment carry the hierarchy rather than gold panels.
 
